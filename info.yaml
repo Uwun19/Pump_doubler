@@ -1,7 +1,7 @@
 # Tiny Tapeout project information
 project:
   title:        "Pump_doubler"      # Project title
-  author:       "Isaac Cadena, Casandra Anaya, Gerardo Lopez, Sergio Ramirez, Iram Nunez, Adrian Tapia, Marlon Reyes"      # Your name
+  author:       "Isaac Cadena, Casandra Anaya, Gerardo Lopez, Sergio Ramirez, Iram Nunez, Adrian Tapia, Marlon Reyes, Sarahi Alvarez, Dylan Gutierrez, Karlos Hernandez, Luis Jauregui, Carlos Montoya"      # Your name
   discord:      "uwunt_19"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Digital ping pong voltage doubler"      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc

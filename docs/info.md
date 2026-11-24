@@ -16,7 +16,7 @@ The regulator is made of `sky130_fd_sc_hd__inv_16` inverters used as an amplifie
 compares the reference point `VIM`, taken from an external voltage divider, against `AGND`,
 and the result drives the tristate inverters (`sky130_fd_sc_hd__einvn_8`). Several
 inverters are wired in parallel so that the drivers can supply enough current to the
-output. The circuit is clocked through the `clk` input of the tile.
+output. The circuit is clocked through the digital `clk` input of the tile.
 
 The inverter block does not run from the 1.8 V digital supply. Its `VPWR` rail is brought
 out on `ua[4]` (Vin) and its `VGND` rail on `ua[5]` (GND), and the supply on Vin must be
@@ -32,14 +32,12 @@ The analog pins are used as follows.
 
 | Pin | Name | Direction | Function |
 | --- | ---- | --------- | -------- |
-| `ua[0]` | Out | output | Regulated output (read through an external voltage divider) |
+| `ua[0]` | Out | output | Regulated output|
 | `ua[1]` | VIM | input | Reference point from a voltage divider, compared against AGND |
 | `ua[2]` | AGND | input | Analog reference |
-| `ua[3]` | CAP | input | Connected to AGND through a small capacitor (picofarads) |
+| `ua[3]` | CAP | input | Optionally connected to AGND through a small capacitor (picofarads) |
 | `ua[4]` | Vin | power | Supply for the inverter block, 0.8 V to 1 V |
 | `ua[5]` | GND | ground | Return for the inverter block |
-
-The clock enters through the `clk` pin of the tile.
 
 Note on the current revision: in the committed GDS, `ua[1]` through `ua[5]` are connected
 to the circuit, but `ua[0]` (Out) carries only the template pin stub and is not routed to
@@ -48,23 +46,20 @@ any net. The output is therefore not reachable on this revision of the layout.
 ## How to test
 
 Power the tile the usual way. No register writes or input patterns are needed: `ui_in`,
-`uio_in` and `rst_n` are not connected to anything inside the project, and the only digital
-input used is `clk`.
+`uio_in` and `rst_n` are not connected to anything inside the project. The only digital
+input used is `clk`, which comes from the Tiny Tapeout board clock, so no external clock
+source is needed. Set the board clock to 2.56 MHz, which is the rate the design was
+dimensioned for.
 
 Apply a supply between 0.8 V and 1 V on `ua[4]` (Vin) and tie `ua[5]` (GND) to the ground
-of that supply. Connect a small capacitor, in the picofarad range if possible, between
-`ua[3]` (CAP) and `ua[2]` (AGND). Build a voltage divider to set the reference point on
-`ua[1]` (VIM), which the circuit compares against AGND. Drive `clk` with a square wave at
-2.56 MHz, which is the clock rate the design was dimensioned for.
+of that supply. Build a voltage divider to set the reference point on `ua[1]` (VIM), which
+the circuit compares against `ua[2]` (AGND). If needed, connect a small capacitor, in the
+picofarad range, between `ua[3]` (CAP) and `ua[2]` (AGND).
 
-Take the output from `ua[0]` (Out) through a voltage divider and measure it with a scope or
-multimeter. Start at the low end of the supply range, around 0.8 V, and raise it gradually
-while watching the current drawn on Vin.
+Measure the output directly on `ua[0]` (Out) with a scope or multimeter.
 
 ## External hardware
 
 - A voltage divider that sets the reference point `VIM` (`ua[1]`).
-- A voltage divider on the output (`ua[0]`), from which the output voltage is taken.
-- A small capacitor, picofarads if possible, between `CAP` (`ua[3]`) and `AGND` (`ua[2]`).
 - A supply between 0.8 V and 1 V for `Vin` (`ua[4]`).
-- A 2.56 MHz square wave source for `clk`.
+- Optionally, a small capacitor (picofarads) between `CAP` (`ua[3]`) and `AGND` (`ua[2]`), only if it is needed.

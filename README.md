@@ -1,6 +1,9 @@
 ![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg)
 
-# Tiny Tapeout Analog Project Template
+# Pump_doubler
+
+Analog Tiny Tapeout project: the on-chip switching stage of a ping pong charge pump
+voltage doubler. The pump capacitor and the rectifier are external.
 
 - [Read the documentation for project](docs/info.md)
 

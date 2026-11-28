@@ -2,7 +2,7 @@
 project:
   title:        "Pump_doubler"      # Project title
   author:       "Isaac Cadena, Sergio Ramirez, Luis Jauregui, Iram Nunez, Adrian Tapia, Marlon Reyes, Sarahi Alvarez, Dylan Gutierrez, Karlos Hernandez, Carlos Montoya,Casandra Anaya, Gerardo Lopez"      # Your name
-  discord:      "uwunt7767"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
+  discord:      "uwunt7767,astr0k_"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  "Digital ping pong voltage doubler"      # One line description of what your project does
   language:     "Analog" # other examples include Verilog, Amaranth, VHDL, etc
   clock_hz:     2560000       # Clock frequency in Hz (or 0 if not applicable)
